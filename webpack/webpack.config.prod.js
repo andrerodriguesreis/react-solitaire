@@ -40,5 +40,8 @@ module.exports = {
         loader: 'url-loader?limit=1048576'
       }
     ]
+  }, 
+  devServer: {
+    disableHostCheck: true
   }
 };

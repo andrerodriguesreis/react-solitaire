@@ -54,7 +54,7 @@ class DealArea extends Component {
     if (flipped) {
       // If the card is face down, flip the top three cards off the stack and move to FACEUP
       let { moveCards } = this.props;
-      let toMove = children.slice(-FLIP_AT_A_TIME).reverse().map((card) => {
+      let toMove = children.slice(-this.props.flipAtTimeValue.value).reverse().map((card) => {
         let { name } = card.props;
         return {
           name,
@@ -85,7 +85,7 @@ class DealArea extends Component {
     }
   }
   render () {
-    let { faceUp, faceDown, offsetWidth, offsetHeight } = this.props;
+    let { faceUp, faceDown, offsetWidth, offsetHeight, flipAtTimeValue } = this.props;
     let faceUpHooked;
     if (!faceUp.length) {
       faceUpHooked = [];

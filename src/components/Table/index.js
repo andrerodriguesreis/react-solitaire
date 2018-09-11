@@ -50,7 +50,7 @@ class Table extends Component {
       'handleTouchEnd', 'handleTouchMove',
       'getOffsetFromTable', 'getCardDimensions', 'getAvailableMoves',
       'cardSlice', 'cardLocate', 'createRow', 'dealCards',
-      'checkGameWon', 'doWinAnimation'
+      'checkGameWon', 'doWinAnimation', 'handleFlipAtTime'
     ];
 
     ownFuncs.forEach((elem) => {
@@ -63,7 +63,8 @@ class Table extends Component {
 
     this.state = {
       loading: true,
-      redeal: false
+      redeal: false,
+      flipAtTime: { value: 3, label: 'Three' }
     };
   }
 
@@ -93,6 +94,9 @@ class Table extends Component {
     }, () => {
       setTimeout(() => this.setState({loading: false}), 0);
     });
+  }
+  handleFlipAtTime(value){
+    this.setState({flipAtTime: value});
   }
   handleCardFlip (card) {
     let { flipCard } = this.props;
@@ -413,13 +417,16 @@ class Table extends Component {
                       canUndo={!!this.props.canUndo}
                       canRedo={!!this.props.canRedo}
                       handleDealButtonClick={this.handleDealButtonClick}
+                      flipAtTimeValue={this.state.flipAtTime}
+                      flipAtTimeOnHandler={this.handleFlipAtTime}
         />
         <DealArea moveCards={this.props.moveCards}
                   getAvailableMoves={this.getAvailableMoves}
                   offsetWidth={droppableWidth}
                   offsetHeight={droppableHeight}
                   faceUp={dealAreaFaceUpCards}
-                  faceDown={dealAreaFaceDownCards}>
+                  faceDown={dealAreaFaceDownCards}
+                  flipAtTimeValue={this.state.flipAtTime}>
         </DealArea>
 
         <AceArea>

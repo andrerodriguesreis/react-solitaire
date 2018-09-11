@@ -35,5 +35,8 @@ module.exports = {
       }
     ]
   },
+  devServer: {
+    disableHostCheck: true
+  },
   devtool: 'eval'
 };

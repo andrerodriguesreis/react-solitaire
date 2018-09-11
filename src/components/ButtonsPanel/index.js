@@ -1,7 +1,10 @@
 /* eslint-disable no-unused-vars*/
 import React, { Component, PropTypes } from 'react';
+import styles from './styles';
 /* eslint-enable no-unused-vars*/
 import GameButton from '../../components/GameButton/';
+
+import Select from 'react-select';
 
 const propTypes = {
   handleRedoButtonClick: PropTypes.func.isRequired,
@@ -11,12 +14,19 @@ const propTypes = {
   canUndo: PropTypes.bool,
   canRedo: PropTypes.bool
 };
+const options = [
+            { value: 1, label: 'One' },
+            { value: 2, label: 'Two' },
+            { value: 3, label: 'Three' }
+          ];
 const ButtonsPanel = ({handleRedoButtonClick,
                        handleUndoButtonClick,
                        doWinAnimation,
                        canUndo,
                        canRedo,
-                       handleDealButtonClick}) => (
+                       handleDealButtonClick,
+                       flipAtTimeValue,
+                   	   flipAtTimeOnHandler}) => (
   <div>
     <GameButton className={'btn btn-sucess'}
                 float={'left'}
@@ -30,6 +40,18 @@ const ButtonsPanel = ({handleRedoButtonClick,
                 onClick={handleUndoButtonClick}>
       {'Undo!'}
     </GameButton>
+    <div className="section">
+      <Select
+          options={options}
+          clearable={false}
+          onChange={flipAtTimeOnHandler}
+          value={flipAtTimeValue}
+          multi={false}
+          matchPos= {'any'}
+          matchValue={true}
+          matchLabel={true}
+          />
+      </div>
     {/* <GameButton className={'btn btn-sucess'}
                 float={'left'}
                 onClick={doWinAnimation}>
